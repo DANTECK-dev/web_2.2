@@ -1,0 +1,81 @@
+:root {
+    --cp-color-1-hsl: 0deg 0% 100%;
+    --cp-color-1: hsl(var(--cp-color-1-hsl));
+    --cp-color-2-hsl: 240deg 7.6923076923% 94.9019607843%;
+    --cp-color-2: hsl(var(--cp-color-2-hsl));
+    --cp-color-3-hsl: 225deg 10.5263157895% 92.5490196078%;
+    --cp-color-3: hsl(var(--cp-color-3-hsl));
+    --cp-color-4-hsl: 228deg 9.8039215686% 90%;
+    --cp-color-4: hsl(var(--cp-color-4-hsl));
+    --cp-color-5-hsl: 226.6666666667deg 12% 85.2941176471%;
+    --cp-color-5: hsl(var(--cp-color-5-hsl));
+    --cp-color-6-hsl: 230deg 12% 80.3921568627%;
+    --cp-color-6: hsl(var(--cp-color-6-hsl));
+    --cp-color-7-hsl: 225.8823529412deg 13.3858267717% 75.0980392157%;
+    --cp-color-7: hsl(var(--cp-color-7-hsl));
+    --cp-color-8-hsl: 226.6666666667deg 11.8421052632% 70.1960784314%;
+    --cp-color-8: hsl(var(--cp-color-8-hsl));
+    --cp-color-9-hsl: 233.3333333333deg 9.8901098901% 64.3137254902%;
+    --cp-color-9: hsl(var(--cp-color-9-hsl));
+    --cp-color-10-hsl: 226.1538461538deg 12.037037037% 57.6470588235%;
+    --cp-color-10: hsl(var(--cp-color-10-hsl));
+    --cp-color-11-hsl: 228.3870967742deg 12.2529644269% 50.3921568627%;
+    --cp-color-11: hsl(var(--cp-color-11-hsl));
+    --cp-color-12-hsl: 228deg 12.1951219512% 40.1960784314%;
+    --cp-color-12: hsl(var(--cp-color-12-hsl));
+    --cp-color-13-hsl: 227.3684210526deg 12.2580645161% 30.3921568627%;
+    --cp-color-13: hsl(var(--cp-color-13-hsl));
+    --cp-color-14-hsl: 222.8571428571deg 13.7254901961% 20%;
+    --cp-color-14: hsl(var(--cp-color-14-hsl));
+    --cp-color-15-hsl: 223.6363636364deg 12.9411764706% 16.6666666667%;
+    --cp-color-15: hsl(var(--cp-color-15-hsl));
+    --cp-color-16-hsl: 232.5deg 11.7647058824% 13.3333333333%;
+    --cp-color-16: hsl(var(--cp-color-16-hsl));
+    --cp-color-17-hsl: 225deg 9.5238095238% 8.2352941176%;
+    --cp-color-17: hsl(var(--cp-color-17-hsl));
+    --cp-color-18-hsl: 240deg 9.0909090909% 4.3137254902%;
+    --cp-color-18: hsl(var(--cp-color-18-hsl));
+    --cp-color-19-hsl: 0deg 0% 0.3921568627%;
+    --cp-color-19: hsl(var(--cp-color-19-hsl));
+    --cp-color-20-hsl: 0deg 0% 0%;
+    --cp-color-20: hsl(var(--cp-color-20-hsl));
+}
+*, *:after, *:before {
+    box-sizing: border-box;
+    list-style-type: none;
+    margin: 0;
+    transition: ease-in-out 0.2s;
+}
+body {
+    background: var(--cp-color-17);
+}
+h1, h2, h3, h4, h5, h6, p {
+    color: var(--cp-color-8);
+}
+a:hover, a:focus {
+    color: var(--cp-color-17);
+    background-size: 100% 100%;
+}
+a {
+    text-decoration: none;
+    color: var(--cp-color-3);
+    background: linear-gradient(aqua, aqua) no-repeat 0 100%;
+    border-radius: 5px;
+    background-size: 100% 0;
+    padding: 20px 50px 20px 50px;
+    border: solid 2px aqua;
+    display: -webkit-inline-box;
+}
+.list_container {
+    background: linear-gradient(var(--cp-color-16), var(--cp-color-15));
+    border-radius: 8px;
+    margin: 20px auto auto auto;
+    text-align: center;
+    max-width: 650px;
+}
+li {
+    padding: 20px 10px 20px 10px;
+}
+ul {
+    padding: 0;
+}

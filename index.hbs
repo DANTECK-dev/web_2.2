@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="list_container">
+        <h1>Главная навигация</h1>
+        <ul>
+            {{#each labs}}
+                <li><h2><a href="{{this}}">{{this}}</a></h2></li>
+            {{/each}}
+        </ul>
+    </div>
+<script rel="script" type="text/javascript" src="script.js"></script>
+</body>
+</html>
