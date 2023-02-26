@@ -1,0 +1,16 @@
+<div class="list_container max">
+    <h1>{{{title}}}</h1>
+    <ul>
+        {{#each labs_max}}
+            <li><h2><a href="{{this.[1]}}">{{this.[0]}}</a></h2></li>
+        {{/each}}
+    </ul>
+</div>
+<div class="list_container min">
+    <h1>Главная навигация</h1>
+    <ul>
+        {{#each labs_min}}
+            <li><h2><a href="{{this.[1]}}">{{this.[0]}}</a></h2></li>
+        {{/each}}
+    </ul>
+</div>

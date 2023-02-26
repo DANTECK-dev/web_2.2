@@ -1,7 +1,9 @@
 const PORT = 3000
 const HOST = "localhost"
 const express = require("express")
+const hbs = require(`hbs`)
 const app = express()
+let Data = new Date();
 //const path = require('path')
 //const nodeCmd = require('node-cmd');
 //const win32ole = require('win32ole');
@@ -10,19 +12,22 @@ const app = express()
 //const routes = require('./routes/handlers')
 let fs = require('fs')
 
-app.set('views', __dirname);
-app.set("view engine", "hbs");
-app.use(express.static('./'));
-//app.use(express.static('src/views'));
+app.set(`view engine`, `hbs`)
+app.set(`view options`, { layout: `layouts/layout`})
+hbs.registerPartials(__dirname + `/views/partials`)
+app.use(express.static(__dirname + `/public`))
 
-//app.get("*", (require, response) => {
-//    console.log(require.url)
-//    response.redirect(request.url)
-//})
+app.use((request, response, next)=>{
+    app.set(`views`, `views`)
+    app.set(`view options`, { layout: `layouts/layout`})
+    hbs.registerPartials(__dirname + `+/views/partials`)
+    console.log('Запрошенный адрес:'+ request.url+'\t'+Data);
+    next()
+})
 
-app.get("/", (require, response) => {
+app.get("/", (request, response) => {
     response.redirect("/index")
-} )
+})
 
 app.get("/index(.html?)?", (request, response) => {
     response.render("index.hbs", {
@@ -195,17 +200,64 @@ app.get('/L3(.html?)?', (request, response) => {
     response.render("index.hbs", {
         title: "Лабораторная работа №3",
         labs_max: [
-            ['Задание №1', 'Q3.1'],
+            ['Задание №1 (home)', 'Q3.1'],
+            ['Задание №1 (contact)', 'Q3.1/contact'],
             ['Задание №2', 'Q3.2'],
             ['Задание №3', 'Q3.3'],
             ['Задание №4', 'Q3.4']
         ],
         labs_min: [
-            ['З №1', 'Q3.1'],
+            ['З №1 (h)', 'Q3.1'],
+            ['З №1 (c)', 'Q3.1/contact'],
             ['З №2', 'Q3.2'],
             ['З №3', 'Q3.3'],
             ['З №4', 'Q3.4']
         ]
+    })
+})
+app.get('/Q3.1(.html?)?(/home)?', (request, response) =>{
+    response.send("<h1>Главная страница</h1>");
+})
+app.get('/Q3.1(.html?)?/contact', (request, response) => {
+    response.send(`<p>Немеров А.П.</p>`)
+})
+app.get('/Q3.2(.html?)?', (request, response) => {
+    let count = 9
+    let mas = require('./lab_1/task3/app').appjs(count)
+    let mass = []
+    for(let i = 0; i < count; i++)
+        mass[i] = [mas[i], '/']
+    console.log(mass)
+    response.render("index.hbs", {
+        title: "Лабораторная работа №2 Задание №3",
+        labs_max: mass,
+        labs_min: mass
+    })
+})
+app.get('/Q3.3(.html?)?', (request, response) => {
+    let count = 9
+    let mas = require('./lab_1/task3/app').appjs(count)
+    let mass = []
+    for(let i = 0; i < count; i++)
+        mass[i] = [mas[i], '/']
+    console.log(mass)
+    response.render("index.hbs", {
+        title: "Лабораторная работа №2 Задание №3",
+        labs_max: mass,
+        labs_min: mass
+    })
+})
+app.get('/Q3.4(.html?)?', (request, response) => {
+    let count = 9
+    let mas = require('./lab_1/task3/app').appjs(count)
+    let mass = []
+    for(let i = 0; i < count; i++)
+        mass[i] = [mas[i], '/']
+    console.log(mass)
+    response.render("index.hbs", {
+        title: "Лабораторная работа №2 Задание №3",
+        labs_max: mass,
+        labs_min: mass
     })
 })
 
@@ -415,7 +467,13 @@ app.get('/L15', (request, response) => {
 
 //app.use(express.static('./errs'));
 app.get('/*', (request, response) => {
-    response.render("errs/404.hbs")
+    app.set(`views`, `views`)
+    app.set(`view options`, { layout: `layouts/error`})
+    hbs.registerPartials(__dirname + `+/views/partials`)
+    response.render("error.hbs", {
+        error_code: 404,
+        error_text: 'NOT FOUND'
+    })
 })
 
 app.listen(PORT, HOST, ()=>{console.log(`Server started on ${HOST}:${PORT}`)});
