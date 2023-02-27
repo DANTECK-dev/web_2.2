@@ -11,6 +11,7 @@ let Data = new Date();
 //const expbs = require('express-handlebars')
 //const routes = require('./routes/handlers')
 let fs = require('fs')
+const {request} = require("express");
 
 app.set(`view engine`, `hbs`)
 app.set(`view options`, { layout: `layouts/layout`})
@@ -158,20 +159,25 @@ app.get('/Q2.2(.html?)?', (request, response) => {
     response.render("index.hbs", {
         title: "Лабораторная работа №2 Задание №2",
         labs_max: [
-            ['Главная', 'lab_2/general/2/index.html'],
-            ['Контент', 'lab_2/general/2/content.html'],
-            ['Информация', 'lab_2/general/2/info.html']
+            ['Главная', '/Q2.2/index.html'],
+            ['Контент', '/Q2.2/content.html'],
+            ['Информация', '/Q2.2/info.html']
         ],
         labs_min: [
-            ['Главная', 'lab_2/general/2/index.html'],
-            ['Контент', 'lab_2/general/2/content.html'],
-            ['Информация', 'lab_2/general/2/info.html']
+            ['Главная', '/Q2.2/index.html'],
+            ['Контент', '/Q2.2/content.html'],
+            ['Информация', '/Q2.2/info.html']
         ]
     })
+})
+app.get('/Q2.2/*', (request,  response)=>{
+    console.log(__dirname + `\\lab_2\\general\\2\\` + request.url.substring(6))
+    response.sendFile(__dirname + `/lab_2/general/2/` + request.url.substring(6))
 })
 app.get('/Q2.3(.html?)?', (request, response) => {
     let count = 9
     let mas = require('./lab_1/task3/app').appjs(count)
+
     let mass = []
     for(let i = 0; i < count; i++)
         mass[i] = [mas[i], '/']
@@ -474,6 +480,7 @@ app.get('/*', (request, response) => {
         error_code: 404,
         error_text: 'NOT FOUND'
     })
+    console.log(`Error 404`)
 })
 
 app.listen(PORT, HOST, ()=>{console.log(`Server started on ${HOST}:${PORT}`)});
