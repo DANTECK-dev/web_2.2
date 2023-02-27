@@ -1,0 +1,13 @@
+{
+	
+	"name": "modulesapp",
+	"version": "1.0.0",
+	"scripts" : 
+	{
+		"start" : "node app",
+		"dev 5" : "node app 5",
+		"dev 10" : "node app 10",
+		"dev 20" : "node app 20"
+	}
+	 
+}

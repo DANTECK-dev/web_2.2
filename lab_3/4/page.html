@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+ <head>
+     <title>form</title>
+     <meta charset="utf-8">
+ </head>
+ <body>
+    <input type="number" id="input">
+    <button>
+        <a id="out" href="">Ввод</a>
+    </button>
+    
+    <script>
+    var lnk=document.getElementById("out");
+    lnk.addEventListener("click",function(e){
+        let inpt=document.getElementById("input");  
+        lnk.setAttribute("href","page.html/"+inpt.value)
+    })
+    </script>
+ </body>
+</html>

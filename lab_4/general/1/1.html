@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+ <head>
+     <title>1</title>
+     <meta charset="utf-8">
+ </head>
+ <body>
+    <ul id="ul">
+
+    </ul>
+    <input type="text" id="inp">
+    <br>
+    <button onclick="out1()">Кнопка 1</button>
+    <button>
+        <a id="out" href="">Кнопка 2</a>
+    </button>
+    <script>
+        var ul=document.getElementById("ul");
+        var inp=document.getElementById("inp");
+
+        var size=0;
+        var arr=new Array();
+        var answ="";
+        function out1(){
+            ul.innerHTML+=`<li>${inp.value}</li>`;
+            arr.push(inp.value);
+            size++;
+        }
+        var lnk=document.getElementById("out");
+        lnk.addEventListener("click",function(e){
+            for(let i=0;i<size;i++)
+            {
+                if(i!=size-1)
+                answ+="item="+arr[i]+"&";
+                else answ+="item="+arr[i]
+            }
+        let inpt=document.getElementById("input");  
+        lnk.setAttribute("href","2.html?"+answ)
+    })
+    </script>
+ </body>
+</html>
