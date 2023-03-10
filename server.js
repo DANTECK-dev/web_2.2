@@ -124,7 +124,6 @@ app.get('/Q1.3(.html?)?', (request, response) => {
     })
 })
 
-
 app.get('/L2(.html?)?', (request, response) => {
     response.render("index.hbs", {
         title: "Лабораторная работа №2",
@@ -172,7 +171,9 @@ app.get('/Q2.2(.html?)?', (request, response) => {
 })
 app.get('/Q2.2/*', (request,  response)=>{
     console.log(__dirname + `\\lab_2\\general\\2\\` + request.url.substring(6))
-    response.sendFile(__dirname + `/lab_2/general/2/` + request.url.substring(6))
+    if (fs.existsSync(__dirname + `\\lab_2\\general\\2\\` + request.url.substring(6)))
+        response.sendFile(__dirname + `/lab_2/general/2/` + request.url.substring(6))
+    else response.redirect('/*')
 })
 app.get('/Q2.3(.html?)?', (request, response) => {
     let count = 9
@@ -189,17 +190,25 @@ app.get('/Q2.3(.html?)?', (request, response) => {
     })
 })
 app.get('/I2(.html?)?', (request, response) => {
-    let count = 9
-    let mas = require('./lab_1/task3/app').appjs(count)
-    let mass = []
-    for(let i = 0; i < count; i++)
-        mass[i] = [mas[i], '/']
-    console.log(mass)
-    response.render("index.hbs", {
-        title: "Лабораторная работа №1 Задание №3",
-        labs_max: mass,
-        labs_min: mass
-    })
+    response.redirect('/I2/index')
+})
+app.get('/I2/index(.html?)?', (request, response) => {
+    app.set(`views`, `lab_2/individual/views`)
+    app.set(`view options`, { layout: `layouts/layout`})
+    hbs.registerPartials(__dirname + `+/lab_2/individual/views/partials`)
+    response.render("index.hbs")
+})
+app.get('/I2/arduino(.html?)?', (request, response) => {
+    app.set(`views`, `lab_2/individual/views`)
+    app.set(`view options`, { layout: `layouts/layout`})
+    hbs.registerPartials(__dirname + `+/lab_2/individual/views/partials`)
+    response.render("arduino.hbs")
+})
+app.get('/I2/raspberry(.html?)?', (request, response) => {
+    app.set(`views`, `lab_2/individual/views`)
+    app.set(`view options`, { layout: `layouts/layout`})
+    hbs.registerPartials(__dirname + `+/lab_2/individual/views/partials`)
+    response.render("raspberry.hbs")
 })
 
 app.get('/L3(.html?)?', (request, response) => {

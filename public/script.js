@@ -1,3 +1,22 @@
+
+//Preloader
+window.onload = function () {
+    document.body.classList.add('loaded_hiding');
+    window.setTimeout(function () {
+        document.querySelector('header').style.display = 'none'
+        document.querySelector('footer').style.display = 'none'
+        document.querySelector('.content').style.display = 'none'
+        document.body.classList.add('loaded');
+        document.body.classList.remove('loaded_hiding');
+        document.querySelector('header').style.display = 'block'
+        document.querySelector('footer').style.display = 'block'
+        document.querySelector('.content').style.display = 'block'
+        for (let i = 0; element.length > i; i++){
+            Visible (element.item(i));
+        }
+    }, 500);
+}
+
 // Получаем нужный элемент
 let element = document.getElementsByClassName(`list_container`).item(0).getElementsByTagName(`li`);
 
@@ -35,3 +54,21 @@ window.addEventListener('scroll', function() {
     }
 
 });
+
+if(window.history.length > 2) {
+    document.querySelectorAll('.Back').item(0).addEventListener('click', (e) => {
+        history.back();
+    })
+    document.querySelectorAll('.Back').item(1).addEventListener('click', (e) => {
+        history.back();
+    })
+} else {
+    document.querySelectorAll('.Back').item(0).style.display = 'none'
+    document.querySelectorAll('.Back').item(1).style.display = 'none'
+}
+document.querySelectorAll('.Next').item(0).addEventListener('click', (e)=>{
+    history.forward();
+})
+document.querySelectorAll('.Next').item(1).addEventListener('click', (e)=>{
+    history.forward();
+})
