@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Таблица товаров</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<h1>Таблица товаров</h1>
+
+<table id="table">
+    <thead>
+    <tr>
+        <th>Название</th>
+        <th>Цена</th>
+        <th>Количество</th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<div>
+    <h2>Получить данные строки</h2>
+    <label for="indexInput">Введите номер строки:</label>
+    <input type="number" id="indexInput">
+    <button id="getRowButton">Получить</button>
+    <div id="rowResult"></div>
+</div>
+
+<script>
+    // выполняется при загрузке страницы
+    $(document).ready(() => {
+        // получаем данные таблицы и выводим их в таблицу
+        $.ajax({
+            url: 'http://localhost:3000/table',
+            type: 'GET',
+            dataType: 'json',
+            success: (data) => {
+                const tableBody = $('#table tbody');
+                data.forEach((row) => {
+                    const tr = $('<tr></tr>');
+                    tr.append($('<td></td>').text(row.name));
+                    tr.append($('<td></td>').text(row.price));
+                    tr.append($('<td></td>').text(row.quantity));
+                    tableBody.append(tr);
+                });
+            }
+        });
+
+        // обработчик клика на кнопке "Получить"
+        $('#getRowButton').click(() => {
+            const index = $('#indexInput').val();
+            $.ajax({
+                url: `http://localhost:3000/table/${index}`,
+                type: 'GET',
+                dataType: 'json',
+                success: (data) => {
+                    const resultDiv = $('#rowResult');
+                    resultDiv.empty();
+                    resultDiv.append($('<p></p>').text(`Название: ${data.name}`));
+                    resultDiv.append($('<p></p>').text(`Цена: ${data.price}`));
+                    resultDiv.append($('<p></p>').text(`Количество: ${data.quantity}`));
+                },
+                error: (xhr) => {
+                    const resultDiv = $('#rowResult');
+                    resultDiv.empty();
+                    if (xhr.status === 400) {
+                        resultDiv.append($('<p></p>').text(xhr.responseText));
+                    } else {
+                        resultDiv.append($('<p></p>').text('Ошибка сервера'));
+                    }
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
