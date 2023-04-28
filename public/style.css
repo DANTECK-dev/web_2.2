@@ -256,3 +256,15 @@ ul {
 
     }
 }
+
+
+
+input {
+    border-radius: 5px;
+    background-color: transparent;
+    min-height: 80px;
+    min-width: 200px;
+    font-size: 25px;
+    border: aqua solid 2px;
+    color: var(--cp-color-3);
+}
