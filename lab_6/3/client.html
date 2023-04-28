@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Chat</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<div style="display: flex; flex-direction: row;">
+    <form style="display: flex; flex-direction: column;" onsubmit="sendMessage(); return false;">
+        <label for="message">Подобие чата</label>
+        <input type="text" id="message" placeholder="Введите сообщение">
+        <button type="button" onclick="sendMessage()">Отправить</button>
+    </form>
+    <div id="messages" style="width: 80%; padding: 15px;"></div>
+</div>
+<script>
+    let index = 0;
+
+    function getNewMessages() {
+        /*$.ajax({
+            url: 'http://localhost:3000/messages?index=' + message.index + 1,
+            type: 'GET',
+            dataType: 'json',
+            success: (data) => {
+
+            }
+        })*/
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                const messages = JSON.parse(xhr.responseText);
+                messages.forEach(message => {
+                    const messageElement = document.createElement('div');
+                    messageElement.textContent = `${message.index}: ${message.message}`;
+                    document.getElementById('messages').appendChild(messageElement);
+                    index = message.index + 1;
+                });
+            }
+        };
+        xhr.open('GET', `/messages?index=${index}`, true);
+        console.log(index);
+        xhr.send();
+    }
+
+    setInterval(getNewMessages, 3000);
+
+    function sendMessage() {
+        const message = document.getElementById('message').value;
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                document.getElementById('message').value = '';
+            }
+        };
+        xhr.open('POST', '/messages', true);
+        xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+        xhr.send(JSON.stringify({ message }));
+    }
+</script>
+</body>
+</html>

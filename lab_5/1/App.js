@@ -64,7 +64,11 @@ const server = http.createServer(function (req, res) {
                 res.writeHead(200, { 'Content-Type': 'text/plain' });
                 res.end('Text saved');
             });
+<<<<<<< HEAD
         }); 
+=======
+        });
+>>>>>>> master
     }
 
     // Скрипт для получения текста из файла
@@ -87,4 +91,8 @@ const server = http.createServer(function (req, res) {
 // Запускаем сервер на порту 8080
 server.listen(3001, function () {
     console.log('Server is listening on port 3001');
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> master

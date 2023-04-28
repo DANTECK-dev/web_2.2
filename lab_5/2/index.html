@@ -24,19 +24,38 @@
     <label for="indexInput">Введите номер строки:</label>
     <input type="number" id="indexInput">
     <button id="getRowButton">Получить</button>
+<<<<<<< HEAD
+=======
+    <br>
+    <button id="getTableButton">Обновить таблицу</button>
+    <br>
+    <input type="text" id="inputName" placeholder="Введите название продукта">
+    <input type="number" id="inputSum" placeholder="Введите цену продукта">
+    <input type="number" id="inputCount" placeholder="Введите количество продукта">
+    <button id="postTableButton">Добавить</button>
+
+>>>>>>> master
     <div id="rowResult"></div>
 </div>
 
 <script>
+<<<<<<< HEAD
     // выполняется при загрузке страницы
     $(document).ready(() => {
         // получаем данные таблицы и выводим их в таблицу
+=======
+    function updateTable() {
+>>>>>>> master
         $.ajax({
             url: 'http://localhost:3000/table',
             type: 'GET',
             dataType: 'json',
             success: (data) => {
                 const tableBody = $('#table tbody');
+<<<<<<< HEAD
+=======
+                tableBody.empty()
+>>>>>>> master
                 data.forEach((row) => {
                     const tr = $('<tr></tr>');
                     tr.append($('<td></td>').text(row.name));
@@ -46,6 +65,14 @@
                 });
             }
         });
+<<<<<<< HEAD
+=======
+    }
+    // выполняется при загрузке страницы
+    $(document).ready(() => {
+        // получаем данные таблицы и выводим их в таблицу
+        updateTable();
+>>>>>>> master
 
         // обработчик клика на кнопке "Получить"
         $('#getRowButton').click(() => {
@@ -72,7 +99,50 @@
                 }
             });
         });
+<<<<<<< HEAD
     });
 </script>
 </body>
 </html>
+=======
+
+        // обработчик клика на кнопке "Обновления таблицы"
+        $('#getTableButton').click(() => {
+            updateTable();
+        });
+
+        // обработчик клика на кнопке "Добавить в таблицу"
+        $('#postTableButton').click(() => {
+            const index = $('#indexInput').val();
+            $.ajax({
+                url: `http://localhost:3000/save`,
+                type: 'POST',
+                dataType: 'text',
+                data: JSON.stringify({ name: $('#inputName').val(),
+                    price: $('#inputSum').val(),
+                    quantity: $('#inputCount').val() }),
+
+                success: (data) => {
+                    console.log('succ add');
+                    const resultDiv = $('#rowResult');
+                    resultDiv.empty();
+                    resultDiv.append($('<p></p>').text('Успешно добавлено'));
+                    console.log(data);
+                    updateTable();
+                },
+                error: (xhr) => {
+                    const resultDiv = $('#rowResult');
+                    resultDiv.empty();
+                    if (xhr.status === 400) {
+                        resultDiv.append($('<p></p>').text(xhr.responseText));
+                    } else {
+                        resultDiv.append($('<p></p>').text('Ошибка сервера ' + xhr.error_text));
+                    }
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
+>>>>>>> master

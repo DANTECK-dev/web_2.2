@@ -309,6 +309,12 @@ app.get('/L5(.html?)?', (request, response) => {
         ]
     })
 })
+app.get('/Q5.1', (request, response) => {
+    app.set(`views`, `lab_5/1/views`)
+    app.set(`view options`, { layout: `layouts/layout`})
+    hbs.registerPartials(__dirname + `+/lab_5/1/views/partials`)
+    response.render("index.hbs")
+})
 
 app.get('/L6(.html?)?', (request, response) => {
     response.render("index.hbs", {

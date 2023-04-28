@@ -21,11 +21,19 @@ const server = http.createServer((req, res) => {
             console.log('Get table');
             // отправляем данные таблицы в формате JSON
             res.setHeader('Content-Type', 'application/json');
+<<<<<<< HEAD
+=======
+            res.statusCode = 200;
+>>>>>>> master
             res.end(JSON.stringify(tableData));
         } else if (req.url.startsWith('/table/')) {
             console.log('Get table into index');
             // обрабатываем запрос на получение данных по номеру строки
+<<<<<<< HEAD
             const index = parseInt(req.url.substring(7));
+=======
+            const index = parseInt(req.url.substring(7)) - 1;
+>>>>>>> master
             if (isNaN(index) || index < 0 || index >= tableData.length) {
                 // отправляем сообщение об ошибке, если номер строки некорректный
                 res.statusCode = 400;
@@ -33,6 +41,10 @@ const server = http.createServer((req, res) => {
             } else {
                 // отправляем данные строки в формате JSON
                 res.setHeader('Content-Type', 'application/json');
+<<<<<<< HEAD
+=======
+                res.statusCode = 200;
+>>>>>>> master
                 res.end(JSON.stringify(tableData[index]));
             }
         } else {
@@ -45,6 +57,10 @@ const server = http.createServer((req, res) => {
                     res.end('Ошибка сервера' + err);
                 } else {
                     res.setHeader('Content-Type', 'text/html');
+<<<<<<< HEAD
+=======
+                    res.statusCode = 200;
+>>>>>>> master
                     res.end(data);
                 }
             });
@@ -56,12 +72,17 @@ const server = http.createServer((req, res) => {
             console.log('save');
             let body = '';
             req.on('data', (chunk) => {
+<<<<<<< HEAD
+=======
+                console.log('data ' + chunk);
+>>>>>>> master
                 body += chunk.toString();
             });
             req.on('end', () => {
                 // парсим данные из тела запроса
                 const data = JSON.parse(body);
                 // записываем данные в файл
+<<<<<<< HEAD
                 fs.writeFile('text.txt', data.text, (err) => {
                     if (err) {
                         res.statusCode = 500;
@@ -70,6 +91,12 @@ const server = http.createServer((req, res) => {
                         res.end('Данные успешно сохранены в файл');
                     }
                 });
+=======
+                tableData.push(data);
+                res.setHeader('Content-Type', 'text/html');
+                //res.statusCode = 200;
+                res.end('Успешно добавлено');
+>>>>>>> master
             });
         } else {
             res.statusCode = 404;
