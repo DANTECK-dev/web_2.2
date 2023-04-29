@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Button Actions</title>
+
+</head>
+<body>
+<input type="radio" name="script" value="/time"> Вывод текущего времени через alert() <br>
+<input type="radio" name="script" value="/color"> Изменение цвета кнопки на случайный <br>
+<input type="radio" name="script" value="/wrapper"> Обернуть кнопку в блок div случайного цвета (с некоторым padding-ом) <br>
+
+<button id="btn">Выполнить</button>
+<button id="reset">Сбросить</button>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    let action = null;
+
+    $('input[type=radio]').change(function() {
+        console.log('action: ' + action)
+        action = $(this).val();
+    });
+
+    $('#btn').click(function() {
+        console.log('action: ' + action)
+        if (action !== null) {
+            $.getScript(action + '.js', function() {loaded_script()})
+                .done(function(script, textStatus) {
+                    console.log('Скрипт успешно загружен');
+                })
+                .fail(function(jqxhr, settings, exception) {
+                    console.error('Ошибка загрузки скрипта');
+                });
+        }
+    });
+
+    $('#reset').click(function() {
+        $('input[type=radio]').prop('checked', false);
+        action = null;
+    });
+
+</script>
+</body>
+</html>

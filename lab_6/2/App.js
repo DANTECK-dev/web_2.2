@@ -1,29 +1,30 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-
 const app = express();
-const PORT = 3000;
+const path = require('path');
 
-let messages = [];
-let index = 0;
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.get("/", (req, res, next) => {
+    console.log(req.url)
+    next()
+})
 
 app.get('/', (req,res) => {
-    res.sendFile(__dirname + '/client.html');
-});
-app.get('/messages', (req, res) => {
-    const startIndex = req.query.index || 0;
-    const newMessages = messages.slice(startIndex);
-    res.send(newMessages);
+    res.sendFile(__dirname + '/index.html');
 });
 
-app.post('/messages', (req, res) => {
-    const message = req.body.message;
-    messages.push({ index, message });
-    index++;
-    res.sendStatus(200);
+app.get('/color.js', (req,res) => {
+    res.sendFile(__dirname + '/color.js');
 });
 
-app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
+app.get('/time.js', (req,res) => {
+    res.sendFile(__dirname + '/time.js');
+});
+
+app.get('/wrapper.js', (req,res) => {
+    res.sendFile(__dirname + '/wrapper.js');
+});
+
+app.listen(3000, () => {
+    console.log('Server is running on port 3000');
+});
